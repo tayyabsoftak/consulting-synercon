@@ -8,6 +8,7 @@ export default {
         secondary: "#78EDFF", 
         accent: "#0D191B",   
         highlight: "#0B1617",
+        banner:'#F1FAFC'
       },
     },
   },

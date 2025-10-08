@@ -3,23 +3,30 @@ import { newsFeeds } from "../Utils/data";
 import { Share2 } from "lucide-react";
 import { slugify } from "../Utils/utils";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import type { NewsItem } from "../types";
 
 function NewsDetail() {
-  const [copied, setCopied] = useState(false);
-  const { title } = useParams();
+  const [copied, setCopied] = useState<boolean>(false);
+  const { title } = useParams<{ title: string }>();
 
-  const newsItem = newsFeeds.find((news) => slugify(news.title) === title);
+  const newsItem: NewsItem | undefined = newsFeeds.find((news) => slugify(news.title) === title);
   if (!newsItem)
     return <p className="text-center py-20 mx-auto">News not found.</p>;
 
-  const shareLink = () => {
+  const shareLink = (): void => {
     navigator.clipboard.writeText(window.location.href);
     setCopied(true);
   };
-  setTimeout(() => {
-    setCopied(false);
-  }, 3000);
+
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => {
+        setCopied(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [copied]);
 
   const relatedNews = newsFeeds
     .filter((news) => news.id !== newsItem.id)
@@ -58,7 +65,8 @@ function NewsDetail() {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           />
-          <div className="p-6 py-3">
+          <div className="p-6">
+            <div className="flex justify-start gap-3 items-center mb-6">
               <button
                 onClick={shareLink}
                 className="flex items-center text-blue-500 hover:text-blue-700 transition"
@@ -70,6 +78,7 @@ function NewsDetail() {
                   Copied!
                 </span>
               )}
+            </div>
             <h1 className="text-2xl md:text-4xl mb-2">{newsItem.title}</h1>
             <p className="text-gray-700 text-base md:text-lg leading-relaxed">
               {newsItem.description}

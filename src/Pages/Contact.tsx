@@ -163,9 +163,9 @@ function Contact() {
             <div className="md:col-span-2 flex justify-end">
               <button
                 type="submit"
-                className="p-[2px] rounded-lg bg-gradient-to-r from-lightbrown to-brown"
+                className="p-[2px] rounded-lg bg-gradient-to-r from-primary to-secondary"
               >
-                <span className="block bg-white px-8 py-3 rounded-lg font-medium text-black hover:bg-gradient-to-r from-lightbrown to-brown hover:text-white">
+                <span className="block bg-white px-8 py-3 rounded-lg font-medium text-black hover:bg-gradient-to-r from-primary to-secondary hover:text-white">
                   Send Message
                 </span>
               </button>

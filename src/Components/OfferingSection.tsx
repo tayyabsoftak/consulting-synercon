@@ -13,7 +13,7 @@ interface OfferingsGridProps {
 
 const OfferingsGrid: React.FC<OfferingsGridProps> = ({ offerings }) => {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 md:px-24">
+    <div className="min-h-screen flex items-center justify-center px-6 md:px-24 pb-12">
       {/* Grid Container */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl w-full">
         {offerings.map((offering, index) => (
@@ -25,7 +25,7 @@ const OfferingsGrid: React.FC<OfferingsGridProps> = ({ offerings }) => {
                  transition-shadow duration-300"
           >
             {/* Image */}
-            <div className="relative h-48 w-full">
+            <div className="relative h-60 w-full">
               <img
                 src={offering.image}
                 alt={offering.name}

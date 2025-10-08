@@ -48,7 +48,7 @@ const Footer = () => {
               <li key={i}>
                 <Link
                   target="blank"
-                  to={link.href}
+                  to={link.href || ''}
                   className="hover:text-white transition-colors duration-200"
                 >
                   {link.label}
@@ -63,20 +63,26 @@ const Footer = () => {
           <h3 className="font-semibold mb-4 text-xl bg-gradient-to-r  from-primary to-secondary bg-clip-text text-transparent">
             LATEST NEWS
           </h3>
-          <ul className="space-y-2">
-            {newsFeeds.slice(0, 5).map((news, i) => (
-              <li key={i}>
-                <Link
-                  to={`/news/${slugify(news.title)}`}
-                  className="hover:text-white transition-colors duration-200"
-                >
-                  {news.title.length > 35
-                    ? news.title.substring(0, 35) + "..."
-                    : news.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {newsFeeds && newsFeeds.length > 0 ? (
+            <ul className="space-y-2">
+              {newsFeeds.slice(0, 5).map((news,i) => (
+                <li key={i}>
+                  <Link
+                    to={`/news/${slugify(news?.title)}`}
+                    className="hover:text-white transition-colors duration-200"
+                  >
+                    {news.title.length > 35
+                      ? news.title.substring(0, 35) + "..."
+                      : news.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="space-y-2">
+              <li>Coming Soon</li>
+            </ul>
+          )}
         </div>
 
         {/* LOCATIONS Section */}

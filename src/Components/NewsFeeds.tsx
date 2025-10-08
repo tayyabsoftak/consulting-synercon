@@ -4,8 +4,15 @@ import { newsFeeds } from "../Utils/data";
 import { Link } from "react-router-dom";
 import { slugify } from "../Utils/utils";
 
-const firstNews = newsFeeds[0];
-const NewsFeed: React.FC = () => (
+const NewsFeed: React.FC = () => {
+  // Don't render anything if there's no news data
+  if (!newsFeeds || newsFeeds.length === 0) {
+    return null;
+  }
+
+  const firstNews = newsFeeds[0];
+  
+  return (
   <div className="flex flex-col lg:flex-row items-center justify-center text-white py-20 px-6 lg:px-20">
     <div>
       <div className="relative border border-aqua rounded-3xl w-[300px] h-[200px] md:w-[600px] md:h-[400px]">
@@ -69,6 +76,7 @@ const NewsFeed: React.FC = () => (
       </Link>
     </div>
   </div>
-);
+  );
+};
 
 export default NewsFeed;
